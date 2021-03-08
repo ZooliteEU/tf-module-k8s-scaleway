@@ -18,7 +18,7 @@ variable "k8s_cluster_name" {
 # -----------------------------------------------------------------------------
 variable "tags" {
   description = "Tags associated to this cluster"
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -26,7 +26,7 @@ variable "tags" {
 variable "k8s_cluster_node_pools" {
   description = "Define a list of node pools to associate to this cluster."
   type        = list(map(string))
-  default = []
+  default     = []
 }
 
 
@@ -102,18 +102,18 @@ variable "k8s_cluster_priority_cutoff" {
 # -- k8s cluster auto upgrade
 variable "k8s_auto_upgrade" {
   description = "Enable auto upgrade of k8s cluster version"
-  type = bool
-  default = false
+  type        = bool
+  default     = false
 }
 
 variable "k8s_auto_upgrade_window" {
   description = "Start hour of the maintenance window to perform auto upgrade."
-  type = number
-  default = 22
+  type        = number
+  default     = 22
 }
 
 variable "k8s_auto_upgrade_day" {
   description = "The day of the maintenance window to perform auto upgrade."
-  type = string
-  default = "any"
+  type        = string
+  default     = "any"
 }

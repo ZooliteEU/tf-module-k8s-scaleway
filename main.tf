@@ -6,7 +6,7 @@
 terraform {
   required_providers {
     scaleway = {
-      source = "scaleway/scaleway"
+      source  = "scaleway/scaleway"
       version = "2.0.0-rc1"
     }
   }
@@ -36,11 +36,11 @@ resource "scaleway_k8s_cluster" "this" {
   }
 
   dynamic "auto_upgrade" {
-    for_each  = var.k8s_auto_upgrade ? [1] : []
+    for_each = var.k8s_auto_upgrade ? [1] : []
     content {
-      enable = var.k8s_auto_upgrade
+      enable                        = var.k8s_auto_upgrade
       maintenance_window_start_hour = var.k8s_auto_upgrade_window
-      maintenance_window_day = var.k8s_auto_upgrade_day
+      maintenance_window_day        = var.k8s_auto_upgrade_day
     }
   }
 }
@@ -48,15 +48,15 @@ resource "scaleway_k8s_cluster" "this" {
 resource "scaleway_k8s_pool" "this" {
   count = length(var.k8s_cluster_node_pools)
 
-  cluster_id  = scaleway_k8s_cluster.this.id
-  name        = "${var.k8s_cluster_name}-pool-${count.index}"
-  node_type   = var.k8s_cluster_node_pools[count.index].node_type
-  size        = var.k8s_cluster_node_pools[count.index].node_count
-  autoscaling = var.k8s_cluster_node_pools[count.index].autoscaling_enable
-  autohealing = var.k8s_cluster_node_pools[count.index].autohealing_enable
-  min_size    = var.k8s_cluster_node_pools[count.index].min_size
-  max_size    = var.k8s_cluster_node_pools[count.index].max_size
-  container_runtime = contains(keys(var.k8s_cluster_node_pools[count.index]), "container_runtime") ? var.k8s_cluster_node_pools[count.index].container_runtime : "docker" 
+  cluster_id        = scaleway_k8s_cluster.this.id
+  name              = "${var.k8s_cluster_name}-pool-${count.index}"
+  node_type         = var.k8s_cluster_node_pools[count.index].node_type
+  size              = var.k8s_cluster_node_pools[count.index].node_count
+  autoscaling       = var.k8s_cluster_node_pools[count.index].autoscaling_enable
+  autohealing       = var.k8s_cluster_node_pools[count.index].autohealing_enable
+  min_size          = var.k8s_cluster_node_pools[count.index].min_size
+  max_size          = var.k8s_cluster_node_pools[count.index].max_size
+  container_runtime = contains(keys(var.k8s_cluster_node_pools[count.index]), "container_runtime") ? var.k8s_cluster_node_pools[count.index].container_runtime : "docker"
 
   tags = var.tags
 }
