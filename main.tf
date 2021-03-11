@@ -12,10 +12,6 @@ terraform {
   }
 }
 
-provider "scaleway" {
-  zone   = var.zone
-  region = var.region
-}
 
 resource "scaleway_k8s_cluster" "this" {
   name             = var.k8s_cluster_name
