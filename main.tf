@@ -17,8 +17,6 @@ resource "scaleway_k8s_cluster" "this" {
   name             = var.k8s_cluster_name
   version          = var.k8s_cluster_version
   cni              = var.k8s_cluster_cni_plugin
-  enable_dashboard = var.k8s_cluster_dashboard_enable
-  ingress          = var.k8s_cluster_ingress_controller
   tags             = var.tags
 
   autoscaler_config {

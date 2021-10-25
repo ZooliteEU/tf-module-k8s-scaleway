@@ -43,19 +43,6 @@ variable "k8s_cluster_cni_plugin" {
   default     = "cilium"
 }
 
-variable "k8s_cluster_dashboard_enable" {
-  description = "Enable the Kubernetes dashboard"
-  type        = bool
-  default     = false
-}
-
-variable "k8s_cluster_ingress_controller" {
-  description = "Ingress controller to deploy with this cluster"
-  type        = string
-  default     = "none"
-}
-
-
 # -- k8s cluster autoscaling resources
 variable "k8s_cluster_scale_down_disable" {
   description = "Disabled the option to scale down"
